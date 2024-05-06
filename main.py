@@ -11,12 +11,13 @@ import numpy as np
 import sys
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-model = torch.hub.load('ultralytics/yolov5', 'custom', path="train/best.pt", force_reload=True)
+model = torch.hub.load('./yolov5', 'custom', path="train/best.pt", force_reload=True, source='local')
 model.to(device)
 
 timer = 0
 event = False
 def timer(reset = False):
+    global timer
     if reset:
         timer = time.time()
         return 0
@@ -24,7 +25,7 @@ def timer(reset = False):
         return time.time() - timer
 
 
-def detect_objects(video_source="rtsp://192.168.144.25:8554/main.264"):
+def detect_objects(video_source=0):
 
     cap = cv2.VideoCapture(video_source)
 
@@ -66,5 +67,4 @@ def detect_objects(video_source="rtsp://192.168.144.25:8554/main.264"):
 
 if __name__ == '__main__':
     print(device)
-    # detect_objects_image()
-    detect_objects()
+    detect_objects() # "rtsp://192.168.144.25:8554/main.264"
