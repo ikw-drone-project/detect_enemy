@@ -1,0 +1,3 @@
+# conda / pytorch
+# 환경을 고려하여 README.md를 참고할 것.
+numpy~=1.24.3
